@@ -1,0 +1,21 @@
+DELETE FROM recipe;
+DELETE FROM stock;
+DELETE FROM price_history;
+DELETE FROM salary_history;
+DELETE FROM staff;
+DELETE FROM product;
+DELETE FROM category;
+
+DELETE FROM admin;
+
+-- DROP TABLE
+
+DROP TABLE recipe CASCADE;
+DROP TABLE stock CASCADE;
+DROP TABLE price_history CASCADE;
+DROP TABLE salary_history CASCADE;
+DROP TABLE staff CASCADE;
+DROP TABLE product CASCADE;
+DROP TABLE category CASCADE;
+
+DROP TABLE admin CASCADE;

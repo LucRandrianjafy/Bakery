@@ -1,0 +1,97 @@
+# BOULANGERIE
+    - Produit
+    - Ingrédient
+    - Production 
+    - Vente
+
+
+    Fabrication produit  :
+        - Matière première
+        - Autre dépense
+
+    Achat :
+        - Caisse --
+        - Stock ( matière  première ++ ) 
+
+    Stock :
+        - Matière  première 
+        - Produit
+
+    Vente :
+        - Caisse ++
+        - Stock ( produit -- )
+
+    Personnel :
+        - Salaire
+
+
+# Fonctionnalité
+    - Login 
+        . vues  :
+                    - formulaire de login, avec email et password
+        . fonctions  :
+                    - login( email, password ) : boolean 
+
+    - Vente (crud)
+        . vues  :
+                    - liste vente
+                    - insertion vente
+                    - modification vente
+        . fonctions  :
+                    - Vente.getAll() : List<Vente>
+                    - Vente.getById(id) : Vente
+                    - Vente.update() : boolean
+                    - Vente.insert() : boolean
+                    - Vente.delete() : boolean
+
+    - Achat (crud)
+        . vues  :
+                    - liste achat
+                    - insertion achat
+                    - modification achat
+        . fonctions  :
+                    - Achat.getAll() : List<Achat>
+                    - Achat.getById(id) : Achat
+                    - Achat.update(Achat) : boolean
+                    - Achat.insert() : boolean
+                    - Achat.delete() : boolean
+
+    - Produit (crud) 
+        . vues  :
+                    - liste produit
+                    - insertion produit
+                    - modification produit
+        . fonctions  :
+                    - Produit.getAll() : List<Produit>
+                    - Produit.getById(id) : Produit
+                    - Produit.update() : boolean
+                    - Produit.insert() : boolean
+                    - Produit.delete() : boolean
+
+    - Personnel (crud)
+        . vues  :
+                    - liste personnel
+                    - insertion personnel
+                    - modification personnel
+        . fonctions  :
+                    - Personnel.getAll() : List<Personnel>
+                    - Personnel.getById(id) : Personnel
+                    - Personnel.update() : boolean
+                    - Personnel.insert() : boolean
+                    - Personnel.delete() : boolean
+
+    - Stock
+        . vues  :
+                    - État  de stock
+                    - liste produits  disponibles
+                    - liste matières premières disponibles
+        . fonctions  :
+                    - Stock.getTotalAmount() : double
+                    - Stock.getProducts() : List<Produit>   
+                    - Stock.getMP() : List<Produit>         // matière première
+
+                   
+        
+
+
+    
