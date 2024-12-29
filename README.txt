@@ -1,0 +1,4 @@
+- Mettre dans variable d'environnement les libs dans web/WEB-INF/lib/
+- Changer USER et PASSWORD dans src/Connexion.java pour etre adequat a votre postgreSql 
+- Inserer le table dans sql/table.sql
+- Executer sur src/deploy.bat
