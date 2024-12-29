@@ -42,12 +42,12 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        text-decoration: none; /* Pour éviter le soulignement */
-        transition: background-color 0.3s, color 0.3s; /* Ajouté pour une transition fluide */
+        text-decoration: none;
+        transition: background-color 0.5s, color 0.5s;
     }
 
     .circle-button:hover {
-        background-color: rgb(21, 122, 37);
+        background-color: #1e4356;
         color: white;
     }
 

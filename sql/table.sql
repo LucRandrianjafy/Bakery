@@ -41,15 +41,16 @@ CREATE TABLE product(
 
 CREATE TABLE stock(
    id_stock SERIAL,
-   purchase_qtt INTEGER NOT NULL,
    sale_qtt INTEGER NOT NULL,
+   purchase_qtt INTEGER NOT NULL,
+   unitary_purchase_amount NUMERIC(15,2) NOT NULL,
    date_inventory DATE NOT NULL,
    id_product INTEGER NOT NULL,
    PRIMARY KEY(id_stock),
    FOREIGN KEY(id_product) REFERENCES product(id_product)
 );
 
-CREATE TABLE price_history(
+CREATE TABLE sale_price_history(
    id_price_history SERIAL,
    amount NUMERIC(15,2)   NOT NULL,
    date_history DATE NOT NULL,
@@ -62,6 +63,7 @@ CREATE TABLE recipe(
    id_recipe SERIAL,
    id_product INTEGER NOT NULL,
    id_product_ingredient INTEGER,
+   qtt_ingredient NUMERIC(15,2) NOT NULL,
    PRIMARY KEY(id_recipe),
    FOREIGN KEY(id_product) REFERENCES product(id_product),
    FOREIGN KEY(id_product_ingredient) REFERENCES product(id_product)
