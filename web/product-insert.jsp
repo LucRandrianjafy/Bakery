@@ -75,10 +75,7 @@
         <center><h2>Product</h2></center>
 
         <!-- Formulaire de modification du produit -->
-        <form action="insert-product" method="post">
-          
-          <!-- Champ caché pour l'ID du produit -->
-          <input type="hidden" name="idProduct" />
+        <form action="insert-product" method="post" enctype="multipart/form-data">
 
           <!-- Champ pour le nom du produit -->
           <div class="form-group">
@@ -95,8 +92,8 @@
           <!-- Champ pour l'image du produit -->
           <div class="form-group">
             <label for="productImage">Image</label>
-            <input type="text" id="productImage" name="productImage" class="form-control" />
-          </div>
+            <input type="file" id="productImage" name="productImage" class="form-control" />
+          </div>          
 
           <!-- Liste déroulante pour la sélection de la catégorie -->
           <div class="form-group">
@@ -125,7 +122,7 @@
 
           <!-- Bouton de soumission -->
            <br>
-          <center><button type="submit">Update</button></center>
+          <center><button type="submit">Insert</button></center>
         </form>
 
       </div>

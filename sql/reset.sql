@@ -1,6 +1,6 @@
 DELETE FROM recipe;
 DELETE FROM stock;
-DELETE FROM price_history;
+DELETE FROM sale_price_history;
 DELETE FROM salary_history;
 DELETE FROM staff;
 DELETE FROM product;
@@ -12,7 +12,7 @@ DELETE FROM admin;
 
 DROP TABLE recipe CASCADE;
 DROP TABLE stock CASCADE;
-DROP TABLE price_history CASCADE;
+DROP TABLE sale_price_history CASCADE;
 DROP TABLE salary_history CASCADE;
 DROP TABLE staff CASCADE;
 DROP TABLE product CASCADE;

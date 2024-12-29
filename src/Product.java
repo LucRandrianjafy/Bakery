@@ -66,13 +66,15 @@ public class Product {
 
     // Méthode pour insérer un produit dans la base de données
     public boolean insert() {
-        String query = "INSERT INTO product (name, id_category) VALUES (?, ?)";
+        String query = "INSERT INTO product (name, id_category, image, description) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Connexion.getConnexion();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, this.name);
             pstmt.setInt(2, this.idCategory);
+            pstmt.setString(3, this.image);
+            pstmt.setString(4, this.description);
 
             return pstmt.executeUpdate() > 0;
 
