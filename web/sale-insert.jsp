@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Sale" %>
+<%@ page import="model.Category" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,62 +29,9 @@
 
   <!-- Main CSS File -->
   <link href="assets/others/css/main.css" rel="stylesheet">
-    <style>
-      h1 {
-        text-align: center;
-        color: white;
-      }
-
-      table {
-        width: 95%;
-        border-collapse: collapse;
-        margin: 20px auto;
-      }
-
-      th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-
-      th {
-        background-color: #1e4356;
-        color: white;
-      }
-
-      tr:hover {
-        background-color: #68a4c4;
-        color: white;
-      }
-
-      .circle-button {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        background-color: white;
-        color: rgb(21, 122, 37);
-        border: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        text-decoration: none;
-        transition: background-color 0.5s, color 0.5s;
-      }
-
-      .circle-button:hover {
-          background-color: #1e4356;
-          color: white;
-      }
-
-
-      .circle-button i {
-          font-size: 50px;
-      }
-    </style>
 </head>
 
-<body class="about-page">
+<body class="portfolio-details-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
@@ -111,55 +60,78 @@
 
     <!-- Page Title -->
     <div class="page-title dark-background">
-      <h1>List of Sales</h1>
+      <div class="container position-relative">
+        <h1>Insert Sale</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Insert Sale</li>
+          </ol>
+        </nav>
+      </div>
     </div><!-- End Page Title -->
 
-    <section id="portfolio" class="portfolio section">
-
-      <div style="display: flex; justify-content: center; align-items: center; height: 3rem;">
-        <a href="#" class="circle-button">
-            <strong><i class="bi bi-plus"></i></strong>
-        </a>
-      </div><br>
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
       
-      <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom du Produit</th>
-                <th>Quantité</th>
-                <th>Prix Unitaire</th>
-                <th>Montant Total</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% 
-                List<Sale> sales = (List<Sale>) request.getAttribute("sales");
-                if (sales != null) { 
-                    for (Sale sale : sales) { 
-            %>
-              <tr>
-                <td><%= sale.getIdStock() %></td>
-                <td><%= sale.getProductName() %></td>
-                <td><%= sale.getSaleQuantity() %></td>
-                <td><%= sale.getSalePrice() %></td>
-                <td><%= sale.getTotalAmount() %></td>
-                <td><%= sale.getDateInventory() %></td>
-              </tr>
-            <% 
-                    } 
+        <center><h2>Sale</h2></center>
+
+        <!-- Formulaire de modification du produit -->
+        <form action="insert-product" method="post" enctype="multipart/form-data">
+
+          <!-- Champ pour le nom du produit -->
+          <div class="form-group">
+            <label for="productName">Name</label>
+            <input type="text" id="productName" name="productName" class="form-control" required />
+          </div>
+
+          <!-- Champ pour la description du produit -->
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <textarea id="productDescription" name="productDescription" class="form-control" required></textarea>
+          </div>
+
+          <!-- Champ pour l'image du produit -->
+          <div class="form-group">
+            <label for="productImage">Image</label>
+            <input type="file" id="productImage" name="productImage" class="form-control" />
+          </div>          
+
+          <!-- Liste déroulante pour la sélection de la catégorie -->
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category" class="form-control" required>
+              <% 
+                // Récupérer la liste des catégories depuis l'attribut de la requête
+                List<Category> categories = (List<Category>) request.getAttribute("categories");
+                if (categories != null) {
+                    // Parcourir et afficher chaque catégorie
+                    for (Category category : categories) {
+              %>
+                      <option value="<%= category.getId() %>">
+                        <%= category.getName() %>
+                      </option>
+              <% 
+                    }
                 } else { 
-            %>
-                <tr>
-                    <td colspan="6">Aucune vente disponible</td>
-                </tr>
-            <% 
+              %>
+                  <option disabled>Aucune catégorie disponible</option>
+              <% 
                 } 
-            %>
-        </tbody>
-      </table>    
-    </section>
+              %>
+            </select>            
+          </div>
+
+          <!-- Bouton de soumission -->
+           <br>
+          <center><button type="submit">Insert</button></center>
+        </form>
+
+      </div>
+    </section><!-- /Portfolio Details Section -->
+
+
   </main>
 
   <footer id="footer" class="footer dark-background">

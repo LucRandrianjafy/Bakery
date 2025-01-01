@@ -118,6 +118,31 @@ public class Purchase {
         this.dateInventory = dateInventory;
     }
 
+    public boolean insert() {
+        String sql = "INSERT INTO stock (purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) "
+                + "VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = Connexion.getConnexion();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, this.getPurchaseQtt());
+            pstmt.setInt(2, 0); // Quantité vendue initialisée à 0
+            pstmt.setTimestamp(3, new java.sql.Timestamp(this.getDateInventory().getTime()));
+            pstmt.setInt(4, this.getIdProduct());
+            pstmt.setDouble(5, this.getUnitaryPurchasePrice());
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'insertion de l'achat !");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
     // Méthode pour obtenir tous les achats
     public static List<Purchase> getAll() {
         String sql = "SELECT * FROM v_purchases";

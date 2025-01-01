@@ -34,20 +34,15 @@ INSERT INTO product ( name, id_category, description, image) VALUES
 ( 'Chocolat en Poudre', 5, 'Chocolat en poudre pour pâtisserie', 'chocolat.jpg');
 
 
-INSERT INTO stock (id_stock, purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) VALUES
-(1, 300, 0, '2024-01-09', 9, 50), -- Farine Bio
-(2, 200, 0, '2024-01-10', 10, 75); -- Chocolat en Poudre
+INSERT INTO stock ( purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) VALUES
+( 50, 0, '2024-01-09 00:00:00', 9, 50), -- Farine Bio
+( 25, 0, '2024-01-10 00:00:00', 10, 75); -- Chocolat en Poudre
 
-INSERT INTO stock (id_stock, purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) VALUES
-(5, 300, 0, '2024-03-09', 9, 50), -- Farine Bio
-(6, 200, 0, '2024-03-10', 10, 75); -- Chocolat en Poudre
+INSERT INTO stock ( purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) VALUES
+( 2, 0, '2024-01-09 00:00:00', 1, 0); --  Baguette Tradition
 
-INSERT INTO stock (id_stock, purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) VALUES
-(3, 0, 300, '2024-01-09', 1, 0), -- Baguette Tradition
-(4, 0, 300, '2024-01-10', 2, 0); -- Pain Complet
 
 INSERT INTO sale_price_history (id_price_history, amount, date_history, id_product) VALUES 
-(11, 9.99, '2024-01-08', 1), -- Baguette Tradition
 (1, 1.00, '2024-01-03', 1), -- Baguette Tradition
 (2, 1.50, '2024-01-01', 2), -- Pain Complet
 (3, 0.90, '2024-01-01', 3), -- Croissant au Beurre
@@ -58,6 +53,7 @@ INSERT INTO sale_price_history (id_price_history, amount, date_history, id_produ
 (8, 1.50, '2024-01-01', 8), -- Jus d'Orange
 (9, 0.50, '2024-01-01', 9), -- Farine Bio
 (10, 0.80, '2024-01-01', 10); -- Chocolat en Poudre
+
 
 INSERT INTO recipe (id_recipe, id_product, id_product_ingredient, qtt_ingredient) VALUES 
 (1, 1, 9, 10),  -- Baguette Tradition nécessite de la Farine Bio

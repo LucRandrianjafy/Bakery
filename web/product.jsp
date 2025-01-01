@@ -75,6 +75,7 @@
           <li><a href="product" class="active">Products</a></li>
           <li><a href="sale">Sales</a></li>
           <li><a href="purchase">Purchases</a></li>
+          <li><a href="fabrication">Manufacturing</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -88,7 +89,6 @@
     <div class="page-title dark-background">
       <div class="container position-relative">
         <h1>Products</h1>
-        <p>You can see the list of all products below.</p>
         <nav class="breadcrumbs">
           <ol>
             <li><a href="index.html">Home</a></li>
@@ -109,7 +109,7 @@
           </a>
         </div><br>
       
-        <div class="row mb-4">
+        <div class="row mb-3">
           <input type="text" id="search-input" placeholder="Search an product" class="form-control"/>
           <button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Search</button>
         </div><br><br>
