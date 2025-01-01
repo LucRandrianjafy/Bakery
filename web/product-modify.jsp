@@ -49,9 +49,10 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="accueil.jsp">Home</a></li>
-          <li><a href="product">Products</a></li>
+          <li><a href="product" class="active">Products</a></li>
           <li><a href="sale">Sales</a></li>
           <li><a href="purchase">Purchases</a></li>
+          <li><a href="fabrication">Manufacturing</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

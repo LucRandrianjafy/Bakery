@@ -41,7 +41,7 @@ CREATE TABLE stock(
    sale_qtt INTEGER NOT NULL,
    purchase_qtt INTEGER NOT NULL,
    unitary_purchase_amount NUMERIC(15,2) NOT NULL, -- matiere premiere
-   date_inventory DATE NOT NULL,
+   date_inventory TIMESTAMP NOT NULL,
    id_product INTEGER NOT NULL,
    PRIMARY KEY(id_stock),
    FOREIGN KEY(id_product) REFERENCES product(id_product)

@@ -44,6 +44,7 @@
           <li><a href="product">Products</a></li>
           <li><a href="sale">Sales</a></li>
           <li><a href="purchase">Purchases</a></li>
+          <li><a href="fabrication">Manufacturing</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -102,7 +103,7 @@
 
     </section><!-- /Hero Section -->
 
-  </main>
+  </main><br>
 
   <footer id="footer" class="footer dark-background">
 
