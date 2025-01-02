@@ -1,7 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.Category" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,46 +81,31 @@
 
           <!-- Champ pour le nom du produit -->
           <div class="form-group">
-            <label for="productName">Name</label>
-            <input type="text" id="productName" name="productName" class="form-control" required />
-          </div>
-
-          <!-- Champ pour la description du produit -->
-          <div class="form-group">
-            <label for="productDescription">Description</label>
-            <textarea id="productDescription" name="productDescription" class="form-control" required></textarea>
-          </div>
-
-          <!-- Champ pour l'image du produit -->
-          <div class="form-group">
-            <label for="productImage">Image</label>
-            <input type="file" id="productImage" name="productImage" class="form-control" />
-          </div>          
-
-          <!-- Liste déroulante pour la sélection de la catégorie -->
-          <div class="form-group">
-            <label for="category">Category</label>
-            <select id="category" name="category" class="form-control" required>
-              <% 
-                // Récupérer la liste des catégories depuis l'attribut de la requête
-                List<Category> categories = (List<Category>) request.getAttribute("categories");
-                if (categories != null) {
-                    // Parcourir et afficher chaque catégorie
-                    for (Category category : categories) {
-              %>
-                      <option value="<%= category.getId() %>">
-                        <%= category.getName() %>
-                      </option>
-              <% 
+            <label for="name">Name</label>
+            <select id="idProduct" name="idProduct" class="form-control" required>
+                <% 
+                    // Récupérer la liste des catégories depuis l'attribut de la requête
+                    List<ProductCategory> pc = (List<ProductCategory>) request.getAttribute("pc");
+                    if (pc != null) {
+                        for (ProductCategory productCategory : pc) {
+                %>
+                            <option value="<%= productCategory.getIdProduct() %>">
+                                <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
+                            </option>
+                <% 
+                        }
                     }
-                } else { 
-              %>
-                  <option disabled>Aucune catégorie disponible</option>
-              <% 
-                } 
-              %>
-            </select>            
-          </div>
+                %>
+            </select>
+          </div> 
+
+          <!-- Quantité achetée -->
+          <label for="purchase_qtt">Quantité vendue :</label>
+          <input type="number" id="purchase_qtt" name="purchase_qtt" required><br><br>
+
+          <!-- Date d'inventaire -->
+          <label for="date_inventory">Date :</label>
+          <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
 
           <!-- Bouton de soumission -->
            <br>
@@ -130,7 +114,6 @@
 
       </div>
     </section><!-- /Portfolio Details Section -->
-
 
   </main>
 

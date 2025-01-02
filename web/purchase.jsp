@@ -119,7 +119,7 @@
     <section id="portfolio" class="portfolio section">
 
       <div style="display: flex; justify-content: center; align-items: center; height: 3rem;">
-        <a href="#" class="circle-button">
+        <a href="insert-purchase" class="circle-button">
             <strong><i class="bi bi-plus"></i></strong>
         </a>
       </div><br>
