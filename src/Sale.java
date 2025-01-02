@@ -120,6 +120,28 @@ public class Sale {
         this.dateInventory = dateInventory;
     }
 
+    public boolean insert() {
+        String sql = "INSERT INTO stock (purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) "
+                + "VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = Connexion.getConnexion();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, 0); // Quantité achetée initialisée à 0
+            pstmt.setInt(2, this.getSaleQuantity()); 
+            pstmt.setTimestamp(3, Timestamp.valueOf(this.getDateInventory()));
+            pstmt.setInt(4, this.getIdProduct());
+            pstmt.setDouble(5, 0);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'insertion de l'achat !");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // Méthode pour obtenir toutes les ventes
     public static List<Sale> getAll() {
         String sql = "SELECT * FROM v_sales";

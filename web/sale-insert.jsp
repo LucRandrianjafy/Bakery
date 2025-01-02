@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Category" %>
+<%@ page import="model.ProductCategory" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,48 +73,58 @@
     <!-- Portfolio Details Section -->
     <section id="portfolio-details" class="portfolio-details section">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <% if (request.getAttribute("message") != null) { %>
+          <div class="alert alert-success" role="alert">
+              <%= request.getAttribute("message") %>
+          </div>
+        <% } %>
+        
+        <% if (request.getAttribute("error_message") != null) { %>
+            <div class="alert alert-danger" role="alert">
+                <%= request.getAttribute("error_message") %>
+            </div>
+        <% } %>
       
-        <center><h2>Sale</h2></center>
+        <center><h2>Sales</h2></center>
 
         <!-- Formulaire de modification du produit -->
-        <form action="insert-product" method="post" enctype="multipart/form-data">
-
-          <!-- Champ pour le nom du produit -->
-          <div class="form-group">
-            <label for="name">Name</label>
-            <select id="idProduct" name="idProduct" class="form-control" required>
-                <% 
-                    // Récupérer la liste des catégories depuis l'attribut de la requête
-                    List<ProductCategory> pc = (List<ProductCategory>) request.getAttribute("pc");
-                    if (pc != null) {
-                        for (ProductCategory productCategory : pc) {
-                %>
-                            <option value="<%= productCategory.getIdProduct() %>">
-                                <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
-                            </option>
-                <% 
-                        }
-                    }
-                %>
-            </select>
-          </div> 
+        <form action="insert-sale" method="post">
+          <!-- ID du produit -->
+          <label for="name">Name</label>
+          <select id="idProduct" name="idProduct" class="form-control" required>
+              <% 
+                  // Récupérer la liste des catégories depuis l'attribut de la requête
+                  List<ProductCategory> pc = (List<ProductCategory>) request.getAttribute("pc");
+                  if (pc != null) {
+                      for (ProductCategory productCategory : pc) {
+              %>
+                          <option value="<%= productCategory.getIdProduct() %>">
+                              <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
+                          </option>
+              <% 
+                      }
+                  }
+              %>
+          </select><br>
 
           <!-- Quantité achetée -->
-          <label for="purchase_qtt">Quantité vendue :</label>
-          <input type="number" id="purchase_qtt" name="purchase_qtt" required><br><br>
-
+          <div class="form-group">
+            <label for="sale_qtt">Quantité vendue :</label>
+            <input type="number" id="sale_qtt" name="sale_qtt" required><br><br>
+          </div>
+          
           <!-- Date d'inventaire -->
-          <label for="date_inventory">Date :</label>
-          <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
-
-          <!-- Bouton de soumission -->
-           <br>
-          <center><button type="submit">Insert</button></center>
+          <div class="form-group">
+            <label for="date_inventory">Date :</label>
+            <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
+          </div>
+          
+          <center><button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Submit</button></center>
         </form>
 
       </div>
     </section><!-- /Portfolio Details Section -->
-
   </main>
 
   <footer id="footer" class="footer dark-background">

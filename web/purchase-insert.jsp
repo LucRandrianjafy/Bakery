@@ -109,17 +109,22 @@
           </select><br>
 
           <!-- Quantité achetée -->
-          <label for="purchase_qtt">Quantité achetée :</label>
-          <input type="number" id="purchase_qtt" name="purchase_qtt" required><br><br>
-  
+          <div class="form-group">
+            <label for="purchase_qtt">Quantité achetée :</label>
+            <input type="number" id="purchase_qtt" name="purchase_qtt" required><br><br>
+          </div>
           <!-- Montant unitaire d'achat -->
-          <label for="unitary_purchase_amount">Montant unitaire d'achat :</label>
-          <input type="number" id="unitary_purchase_amount" name="unitary_purchase_amount" step="0.01" required><br><br>
-
+          <div class="form-group">
+            <label for="unitary_purchase_amount">Montant unitaire d'achat :</label>
+            <input type="number" id="unitary_purchase_amount" name="unitary_purchase_amount" step="0.01" required><br><br>
+          </div>
+          
           <!-- Date d'inventaire -->
-          <label for="date_inventory">Date :</label>
-          <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
-
+          <div class="form-group">
+            <label for="date_inventory">Date :</label>
+            <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
+          </div>
+          
           <center><button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Submit</button></center>
         </form>
 
