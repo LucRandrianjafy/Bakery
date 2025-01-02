@@ -61,8 +61,17 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" xmlns:xsi="http://www.w3.org
     <servlet-mapping>
         <servlet-name>SaleController</servlet-name>
         <url-pattern>/sale</url-pattern>
-    
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SaleInsertController</servlet-name>
+        <servlet-class>controller.SaleInsertController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SaleInsertController</servlet-name>
+        <url-pattern>/insert-sale</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>FabricationController</servlet-name>
         <servlet-class>controller.FabricationController</servlet-class>
