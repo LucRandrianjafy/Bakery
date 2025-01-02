@@ -5,7 +5,7 @@ DECLARE
     available_quantity NUMERIC(15, 2); -- Quantité disponible dans le stock
     ingredient RECORD; -- Itération sur les ingrédients nécessaires
 BEGIN
-    -- Vérifier si NEW.sale_qtt > 0
+    -- Vérifier si NEW.purchase_qtt > 0 (modification ici)
     IF NEW.purchase_qtt > 0 THEN
         -- Parcourir tous les ingrédients nécessaires pour le produit
         FOR ingredient IN
@@ -14,7 +14,7 @@ BEGIN
             WHERE id_product = NEW.id_product
         LOOP
             -- Calculer la quantité totale nécessaire pour cet ingrédient
-            required_quantity := ingredient.qtt_ingredient * NEW.sale_qtt;
+            required_quantity := ingredient.qtt_ingredient * NEW.purchase_qtt; -- On utilise purchase_qtt ici
 
             -- Calculer la quantité disponible dans le stock pour cet ingrédient
             SELECT COALESCE(SUM(purchase_qtt - sale_qtt), 0)
@@ -30,7 +30,7 @@ BEGIN
 
             -- Insertion dans le stock (si la quantité est suffisante)
             INSERT INTO stock (purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount)
-            VALUES (required_quantity, 0, CURRENT_TIMESTAMP, ingredient.id_product_ingredient, 0);
+            VALUES (0, required_quantity, CURRENT_TIMESTAMP, ingredient.id_product_ingredient, 0);
         END LOOP;
     END IF;
 

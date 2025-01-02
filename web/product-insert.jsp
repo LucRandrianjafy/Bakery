@@ -125,7 +125,7 @@
 
           <!-- Bouton de soumission -->
            <br>
-          <center><button type="submit">Insert</button></center>
+           <center><button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Submit</button></center>
         </form>
 
       </div>

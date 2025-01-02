@@ -3,6 +3,7 @@ package model;
 import connexion.Connexion;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +17,15 @@ public class Purchase {
     private String productDescription;
     private int idCategory;
     private String image;
-    private Date dateInventory;
+    private LocalDateTime dateInventory;
 
     // Constructeur vide
     public Purchase() {
     }
 
     // Constructeur non vide
-    public Purchase(int idStock, int idProduct, String productName, int purchaseQuantity, double unitaryPurchasePrice, double totalAmount, 
-                    String productDescription, int idCategory, String image, Date dateInventory) {
+    public Purchase(int idStock, int idProduct, String productName, int purchaseQuantity, double unitaryPurchasePrice,
+                    double totalAmount, String productDescription, int idCategory, String image, LocalDateTime dateInventory) {
         this.idStock = idStock;
         this.idProduct = idProduct;
         this.productName = productName;
@@ -110,29 +111,29 @@ public class Purchase {
         this.image = image;
     }
 
-    public Date getDateInventory() {
+    public LocalDateTime getDateInventory() {
         return dateInventory;
     }
 
-    public void setDateInventory(Date dateInventory) {
+    public void setDateInventory(LocalDateTime dateInventory) {
         this.dateInventory = dateInventory;
     }
 
+    // Méthode d'insertion
     public boolean insert() {
         String sql = "INSERT INTO stock (purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) "
                 + "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = Connexion.getConnexion();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, this.getPurchaseQtt());
+            pstmt.setInt(1, this.getPurchaseQuantity());
             pstmt.setInt(2, 0); // Quantité vendue initialisée à 0
-            pstmt.setTimestamp(3, new java.sql.Timestamp(this.getDateInventory().getTime()));
+            pstmt.setTimestamp(3, Timestamp.valueOf(this.getDateInventory()));
             pstmt.setInt(4, this.getIdProduct());
             pstmt.setDouble(5, this.getUnitaryPurchasePrice());
 
             int rowsAffected = pstmt.executeUpdate();
-
             return rowsAffected > 0;
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'insertion de l'achat !");
@@ -140,8 +141,6 @@ public class Purchase {
         }
         return false;
     }
-
-
 
     // Méthode pour obtenir tous les achats
     public static List<Purchase> getAll() {
@@ -154,16 +153,16 @@ public class Purchase {
 
             while (resultSet.next()) {
                 Purchase purchase = new Purchase(
-                    resultSet.getInt("id_stock"),
-                    resultSet.getInt("id_product"),
-                    resultSet.getString("product_name"),
-                    resultSet.getInt("purchase_qtt"),
-                    resultSet.getDouble("unitary_purchase_price"),
-                    resultSet.getDouble("total_amount"),
-                    resultSet.getString("product_description"),
-                    resultSet.getInt("id_category"),
-                    resultSet.getString("image"),
-                    resultSet.getDate("date_inventory")
+                        resultSet.getInt("id_stock"),
+                        resultSet.getInt("id_product"),
+                        resultSet.getString("product_name"),
+                        resultSet.getInt("purchase_qtt"),
+                        resultSet.getDouble("unitary_purchase_price"),
+                        resultSet.getDouble("total_amount"),
+                        resultSet.getString("product_description"),
+                        resultSet.getInt("id_category"),
+                        resultSet.getString("image"),
+                        resultSet.getTimestamp("date_inventory").toLocalDateTime()
                 );
                 purchases.add(purchase);
             }
@@ -181,20 +180,21 @@ public class Purchase {
 
         try (Connection conn = Connexion.getConnexion();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setInt(1, idProduct);
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 while (resultSet.next()) {
                     Purchase purchase = new Purchase(
-                        resultSet.getInt("id_stock"),
-                        resultSet.getInt("id_product"),
-                        resultSet.getString("product_name"),
-                        resultSet.getInt("purchase_qtt"),
-                        resultSet.getDouble("unitary_purchase_price"),
-                        resultSet.getDouble("total_amount"),
-                        resultSet.getString("product_description"),
-                        resultSet.getInt("id_category"),
-                        resultSet.getString("image"),
-                        resultSet.getDate("date_inventory")
+                            resultSet.getInt("id_stock"),
+                            resultSet.getInt("id_product"),
+                            resultSet.getString("product_name"),
+                            resultSet.getInt("purchase_qtt"),
+                            resultSet.getDouble("unitary_purchase_price"),
+                            resultSet.getDouble("total_amount"),
+                            resultSet.getString("product_description"),
+                            resultSet.getInt("id_category"),
+                            resultSet.getString("image"),
+                            resultSet.getTimestamp("date_inventory").toLocalDateTime()
                     );
                     purchases.add(purchase);
                 }
@@ -213,21 +213,22 @@ public class Purchase {
 
         try (Connection conn = Connexion.getConnexion();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setString(1, dateBegin);
             pstmt.setString(2, dateEnd);
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 while (resultSet.next()) {
                     Purchase purchase = new Purchase(
-                        resultSet.getInt("id_stock"),
-                        resultSet.getInt("id_product"),
-                        resultSet.getString("product_name"),
-                        resultSet.getInt("purchase_qtt"),
-                        resultSet.getDouble("unitary_purchase_price"),
-                        resultSet.getDouble("total_amount"),
-                        resultSet.getString("product_description"),
-                        resultSet.getInt("id_category"),
-                        resultSet.getString("image"),
-                        resultSet.getDate("date_inventory")
+                            resultSet.getInt("id_stock"),
+                            resultSet.getInt("id_product"),
+                            resultSet.getString("product_name"),
+                            resultSet.getInt("purchase_qtt"),
+                            resultSet.getDouble("unitary_purchase_price"),
+                            resultSet.getDouble("total_amount"),
+                            resultSet.getString("product_description"),
+                            resultSet.getInt("id_category"),
+                            resultSet.getString("image"),
+                            resultSet.getTimestamp("date_inventory").toLocalDateTime()
                     );
                     purchases.add(purchase);
                 }
@@ -246,20 +247,21 @@ public class Purchase {
 
         try (Connection conn = Connexion.getConnexion();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setInt(1, idCategory);
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 while (resultSet.next()) {
                     Purchase purchase = new Purchase(
-                        resultSet.getInt("id_stock"),
-                        resultSet.getInt("id_product"),
-                        resultSet.getString("product_name"),
-                        resultSet.getInt("purchase_qtt"),
-                        resultSet.getDouble("unitary_purchase_price"),
-                        resultSet.getDouble("total_amount"),
-                        resultSet.getString("product_description"),
-                        resultSet.getInt("id_category"),
-                        resultSet.getString("image"),
-                        resultSet.getDate("date_inventory")
+                            resultSet.getInt("id_stock"),
+                            resultSet.getInt("id_product"),
+                            resultSet.getString("product_name"),
+                            resultSet.getInt("purchase_qtt"),
+                            resultSet.getDouble("unitary_purchase_price"),
+                            resultSet.getDouble("total_amount"),
+                            resultSet.getString("product_description"),
+                            resultSet.getInt("id_category"),
+                            resultSet.getString("image"),
+                            resultSet.getTimestamp("date_inventory").toLocalDateTime()
                     );
                     purchases.add(purchase);
                 }

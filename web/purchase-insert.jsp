@@ -1,6 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Category" %>
-
+<%@ page import="model.ProductCategory" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,14 +73,40 @@
     <!-- Portfolio Details Section -->
     <section id="portfolio-details" class="portfolio-details section">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <% if (request.getAttribute("message") != null) { %>
+          <div class="alert alert-success" role="alert">
+              <%= request.getAttribute("message") %>
+          </div>
+        <% } %>
+        
+        <% if (request.getAttribute("error_message") != null) { %>
+            <div class="alert alert-danger" role="alert">
+                <%= request.getAttribute("error_message") %>
+            </div>
+        <% } %>
       
         <center><h2>Purchase</h2></center>
 
         <!-- Formulaire de modification du produit -->
         <form action="insert-purchase" method="post">
           <!-- ID du produit -->
-          <label for="id_product">Produit :</label>
-          <input type="number" id="id_product" name="id_product" required><br><br>
+          <label for="name">Name</label>
+          <select id="idProduct" name="idProduct" class="form-control" required>
+              <% 
+                  // Récupérer la liste des catégories depuis l'attribut de la requête
+                  List<ProductCategory> pc = (List<ProductCategory>) request.getAttribute("pc");
+                  if (pc != null) {
+                      for (ProductCategory productCategory : pc) {
+              %>
+                          <option value="<%= productCategory.getIdProduct() %>">
+                              <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
+                          </option>
+              <% 
+                      }
+                  }
+              %>
+          </select><br>
 
           <!-- Quantité achetée -->
           <label for="purchase_qtt">Quantité achetée :</label>
@@ -95,7 +120,7 @@
           <label for="date_inventory">Date :</label>
           <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
 
-          <button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Search</button>
+          <center><button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Submit</button></center>
         </form>
 
       </div>
