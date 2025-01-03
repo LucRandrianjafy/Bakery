@@ -35,4 +35,22 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" xmlns:xsi="http://www.w3.org
         <servlet-name>ProductInsertController</servlet-name>
         <url-pattern>/insert-product</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PurchaseController</servlet-name>
+        <servlet-class>controller.PurchaseController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PurchaseController</servlet-name>
+        <url-pattern>/purchase</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SaleController</servlet-name>
+        <servlet-class>controller.SaleController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SaleController</servlet-name>
+        <url-pattern>/sale</url-pattern>
+    </servlet-mapping>
 </web-app>

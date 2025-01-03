@@ -1,6 +1,3 @@
-CREATE DATABASE boulangerie;
-\c boulangerie;
-
 CREATE TABLE admin (
     id_admin SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
@@ -43,7 +40,7 @@ CREATE TABLE stock(
    id_stock SERIAL,
    sale_qtt INTEGER NOT NULL,
    purchase_qtt INTEGER NOT NULL,
-   unitary_purchase_amount NUMERIC(15,2) NOT NULL,
+   unitary_purchase_amount NUMERIC(15,2) NOT NULL, -- matiere premiere
    date_inventory DATE NOT NULL,
    id_product INTEGER NOT NULL,
    PRIMARY KEY(id_stock),

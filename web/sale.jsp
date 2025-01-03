@@ -1,14 +1,17 @@
+<%@ page import="java.util.List" %>
+<%@ page import="model.Sale" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Bakery</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
+  <!-- Favicons -->
   <link href="assets/others/img/favicon.png" rel="icon">
+  <link href="assets/others/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -24,25 +27,52 @@
 
   <!-- Main CSS File -->
   <link href="assets/others/css/main.css" rel="stylesheet">
-  
+    <style>
+      h1 {
+        text-align: center;
+        color: white;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #1e4356;
+        color: white;
+      }
+
+      tr:hover {
+        background-color: #68a4c4;
+        color: white;
+      }
+    </style>
 </head>
 
-<body class="index-page">
+<body class="about-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="accueil.jsp" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Bakery </h1>
+        <!-- <img src="assets/others/img/logo.png" alt=""> -->
+        <h1 class="sitename">Bakery</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="accueil.jsp" class="active">Home</a></li>
+          <li><a href="accueil.jsp">Home</a></li>
           <li><a href="product">Products</a></li>
-          <li><a href="sale">Sales</a></li>
+          <li><a href="sale" class="active">Sales</a></li>
           <li><a href="purchase">Purchases</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -53,55 +83,50 @@
 
   <main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+      <h1>List of Sales</h1>
+    </div><!-- End Page Title -->
 
-      <!-- <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in"> -->
-
-      <div id="hero-carousel" class="carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-
-        <div class="container position-relative">
-
-          <div class="carousel-item active">
-            <div class="carousel-container">
-              <h2>WELCOME</h2>
-              <p>Welcome to our Bakery, where every bite tells a story! </p>
-              <a href="#about" class="btn-get-started">Read More</a>
-            </div>
-          </div><!-- End Carousel Item -->
-
-          <div class="carousel-item">
-            <div class="carousel-container">
-              <h2>Our Freshly Baked Creations</h2>
-              <p>Discover our artisanal breads, delicate pastries, and sweet treats made fresh every day.</p>
-              <a href="#about" class="btn-get-started">Read More</a>
-            </div>
-          </div><!-- End Carousel Item -->
-
-          <div class="carousel-item">
-            <div class="carousel-container">
-              <h2>Thank You for Visiting Us!</h2>
-              <p>Until next time, may your days be as sweet as our pastries.</p>
-              <a href="#about" class="btn-get-started">Read More</a>
-            </div>
-          </div><!-- End Carousel Item -->
-
-          <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-          </a>
-
-          <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-          </a>
-
-          <ol class="carousel-indicators"></ol>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Hero Section -->
-
+    <section id="portfolio" class="portfolio section">
+      <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom du Produit</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Montant Total</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% 
+                List<Sale> sales = (List<Sale>) request.getAttribute("sales");
+                if (sales != null) { 
+                    for (Sale sale : sales) { 
+            %>
+              <tr>
+                <td><%= sale.getIdStock() %></td>
+                <td><%= sale.getProductName() %></td>
+                <td><%= sale.getSaleQuantity() %></td>
+                <td><%= sale.getSalePrice() %></td>
+                <td><%= sale.getTotalAmount() %></td>
+                <td><%= sale.getDateInventory() %></td>
+              </tr>
+            <% 
+                    } 
+                } else { 
+            %>
+                <tr>
+                    <td colspan="6">Aucune vente disponible</td>
+                </tr>
+            <% 
+                } 
+            %>
+        </tbody>
+      </table>    
+    </section>
   </main>
 
   <footer id="footer" class="footer dark-background">

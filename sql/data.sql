@@ -18,7 +18,7 @@ INSERT INTO salary_history (id_sh, amount, date_salary, id_staff) VALUES
 (1, 1500.00, '2023-01-01', 1),
 (2, 1550.00, '2023-02-01', 2),
 (3, 1600.00, '2023-03-01', 3),
-(4, 2000.00, '2024-03-01', 3),
+(4, 2000.00, '2023-12-01', 3),
 (5, 1650.00, '2023-04-01', 4);
 
 INSERT INTO product ( name, id_category, description, image) VALUES 
@@ -36,9 +36,7 @@ INSERT INTO product ( name, id_category, description, image) VALUES
 
 INSERT INTO stock (id_stock, purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) VALUES
 (1, 300, 0, '2024-01-09', 9, 50), -- Farine Bio
-(2, 200, 0, '2024-01-10', 10, 75); -- Chocolat en Poudre
-
-INSERT INTO stock (id_stock, purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) VALUES
+(2, 200, 0, '2024-01-10', 10, 75), -- Chocolat en Poudre
 (3, 0, 300, '2024-01-09', 1, 0), -- Baguette Tradition
 (4, 0, 300, '2024-01-10', 2, 0); -- Pain Complet
 
