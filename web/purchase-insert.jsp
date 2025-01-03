@@ -28,6 +28,7 @@
 
   <!-- Main CSS File -->
   <link href="assets/others/css/main.css" rel="stylesheet">
+
 </head>
 
 <body class="portfolio-details-page">
@@ -71,65 +72,63 @@
     </div><!-- End Page Title -->
 
     <!-- Portfolio Details Section -->
-    <section id="portfolio-details" class="portfolio-details section">
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <% if (request.getAttribute("message") != null) { %>
-          <div class="alert alert-success" role="alert">
-              <%= request.getAttribute("message") %>
-          </div>
-        <% } %>
-        
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
         <% if (request.getAttribute("error_message") != null) { %>
-            <div class="alert alert-danger" role="alert">
-                <%= request.getAttribute("error_message") %>
-            </div>
+          <div class="alert alert-danger" role="alert">
+            <%= request.getAttribute("error_message") %>
+          </div>
         <% } %>
       
         <center><h2>Purchase</h2></center>
 
         <!-- Formulaire de modification du produit -->
-        <form action="insert-purchase" method="post">
-          <!-- ID du produit -->
-          <label for="name">Name</label>
-          <select id="idProduct" name="idProduct" class="form-control" required>
-              <% 
+        <div class="form-container">
+          <form action="insert-purchase" method="post">
+            <!-- ID du produit -->
+            <div class="form-group">
+              <label for="name">Name</label>
+              <select id="idProduct" name="idProduct" class="form-control" required>
+                <% 
                   // Récupérer la liste des catégories depuis l'attribut de la requête
                   List<ProductCategory> pc = (List<ProductCategory>) request.getAttribute("pc");
                   if (pc != null) {
-                      for (ProductCategory productCategory : pc) {
-              %>
-                          <option value="<%= productCategory.getIdProduct() %>">
-                              <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
-                          </option>
-              <% 
-                      }
+                    for (ProductCategory productCategory : pc) {
+                %>
+                  <option value="<%= productCategory.getIdProduct() %>">
+                    <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
+                  </option>
+                              <% 
+                    }
                   }
-              %>
-          </select><br>
+                %>
+              </select><br>
+            </div>
 
-          <!-- Quantité achetée -->
-          <div class="form-group">
-            <label for="purchase_qtt">Quantité achetée :</label>
-            <input type="number" id="purchase_qtt" name="purchase_qtt" required><br><br>
-          </div>
-          <!-- Montant unitaire d'achat -->
-          <div class="form-group">
-            <label for="unitary_purchase_amount">Montant unitaire d'achat :</label>
-            <input type="number" id="unitary_purchase_amount" name="unitary_purchase_amount" step="0.01" required><br><br>
-          </div>
-          
-          <!-- Date d'inventaire -->
-          <div class="form-group">
-            <label for="date_inventory">Date :</label>
-            <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
-          </div>
-          
-          <center><button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Submit</button></center>
-        </form>
+            <!-- Quantité achetée -->
+            <div class="form-group">
+              <label for="purchase_qtt">Quantité achetée :</label>
+              <input type="number" id="purchase_qtt" name="purchase_qtt" required><br><br>
+            </div>
 
+            <!-- Montant unitaire d'achat -->
+            <div class="form-group">
+              <label for="unitary_purchase_amount">Montant unitaire d'achat :</label>
+              <input type="number" id="unitary_purchase_amount" name="unitary_purchase_amount" step="0.01" required><br><br>
+            </div>
+
+            <!-- Date d'inventaire -->
+            <div class="form-group">
+              <label for="date_inventory">Date :</label>
+              <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
+            </div>
+
+            <center><button id="search-btn" class="btn btn-primary" style="background-color:#1e4356; margin-top: 2rem;">Submit</button></center>
+          </form>
+        </div>
       </div>
     </section><!-- /Portfolio Details Section -->
+  
   </main>
 
   <footer id="footer" class="footer dark-background">

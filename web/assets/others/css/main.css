@@ -2651,3 +2651,113 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
 }
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 500px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #1e4356;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #1e4356;
+      box-shadow: 0 0 5px rgba(30, 67, 86, 0.5);
+    }
+
+    .btn-primary {
+      background-color: #1e4356;
+      border-color: #1e4356;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #16333e;
+      border-color: #16333e;
+    }
+
+    .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 500px;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    color: #1e4356;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #1e4356;
+  box-shadow: 0 0 5px rgba(30, 67, 86, 0.5);
+}
+
+.btn-primary {
+  background-color: #1e4356;
+  border-color: #1e4356;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #16333e;
+  border-color: #16333e;
+}
+
+.footer {
+  background-color: #1e4356;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.footer .sitename {
+  color: #fff;
+}
+

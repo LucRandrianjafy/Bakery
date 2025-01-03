@@ -28,6 +28,7 @@
 
   <!-- Main CSS File -->
   <link href="assets/others/css/main.css" rel="stylesheet">
+
 </head>
 
 <body class="portfolio-details-page">
@@ -76,54 +77,57 @@
 
         <% if (request.getAttribute("message") != null) { %>
           <div class="alert alert-success" role="alert">
-              <%= request.getAttribute("message") %>
-          </div>
-        <% } %>
-        
-        <% if (request.getAttribute("error_message") != null) { %>
-            <div class="alert alert-danger" role="alert">
-                <%= request.getAttribute("error_message") %>
-            </div>
-        <% } %>
-      
-        <center><h2>Sales</h2></center>
+  <%= request.getAttribute("message") %>
+</div>
+<% } %>
 
-        <!-- Formulaire de modification du produit -->
-        <form action="insert-sale" method="post">
-          <!-- ID du produit -->
-          <label for="name">Name</label>
-          <select id="idProduct" name="idProduct" class="form-control" required>
-              <% 
-                  // Récupérer la liste des catégories depuis l'attribut de la requête
-                  List<ProductCategory> pc = (List<ProductCategory>) request.getAttribute("pc");
-                  if (pc != null) {
-                      for (ProductCategory productCategory : pc) {
-              %>
-                          <option value="<%= productCategory.getIdProduct() %>">
-                              <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
-                          </option>
-              <% 
-                      }
-                  }
-              %>
-          </select><br>
+<% if (request.getAttribute("error_message") != null) { %>
+  <div class="alert alert-danger" role="alert">
+    <%= request.getAttribute("error_message") %>
+  </div>
+<% } %>
 
-          <!-- Quantité achetée -->
-          <div class="form-group">
-            <label for="sale_qtt">Quantité vendue :</label>
-            <input type="number" id="sale_qtt" name="sale_qtt" required><br><br>
-          </div>
-          
-          <!-- Date d'inventaire -->
-          <div class="form-group">
-            <label for="date_inventory">Date :</label>
-            <input type="datetime-local" id="date_inventory" name="date_inventory" required><br><br>
-          </div>
-          
-          <center><button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Submit</button></center>
-        </form>
+<center><h2>Sales</h2></center>
 
-      </div>
+<!-- Formulaire de modification du produit -->
+<div class="form-container">
+  <form action="insert-sale" method="post">
+    <!-- ID du produit -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <select id="idProduct" name="idProduct" class="form-control" required>
+        <% 
+          List<ProductCategory> pc = (List<ProductCategory>) request.getAttribute("pc");
+          if (pc != null) {
+            for (ProductCategory productCategory : pc) {
+        %>
+        <option value="<%= productCategory.getIdProduct() %>">
+          <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
+        </option>
+        <% 
+            }
+          }
+        %>
+      </select><br>
+    </div>
+
+    <!-- Quantité achetée -->
+    <div class="form-group">
+      <label for="sale_qtt">Quantité vendue :</label>
+      <input type="number" id="sale_qtt" name="sale_qtt" class="form-control" required><br><br>
+    </div>
+    
+    <!-- Date d'inventaire -->
+    <div class="form-group">
+      <label for="date_inventory">Date :</label>
+      <input type="date" id="date_inventory" name="date_inventory" class="form-control" required><br><br>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Soumettre</button>
+    </div>
+  </form>
+</div>
     </section><!-- /Portfolio Details Section -->
   </main>
 
