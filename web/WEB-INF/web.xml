@@ -46,11 +46,38 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" xmlns:xsi="http://www.w3.org
     </servlet-mapping>
     
     <servlet>
+        <servlet-name>PurchaseInsertController</servlet-name>
+        <servlet-class>controller.PurchaseInsertController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PurchaseInsertController</servlet-name>
+        <url-pattern>/insert-purchase</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>SaleController</servlet-name>
         <servlet-class>controller.SaleController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SaleController</servlet-name>
         <url-pattern>/sale</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SaleInsertController</servlet-name>
+        <servlet-class>controller.SaleInsertController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SaleInsertController</servlet-name>
+        <url-pattern>/insert-sale</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FabricationController</servlet-name>
+        <servlet-class>controller.FabricationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FabricationController</servlet-name>
+        <url-pattern>/fabrication</url-pattern>
     </servlet-mapping>
 </web-app>

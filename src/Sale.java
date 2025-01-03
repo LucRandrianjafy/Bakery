@@ -3,6 +3,8 @@ package model;
 import connexion.Connexion;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +18,15 @@ public class Sale {
     private String productDescription;
     private int idCategory;
     private String image;
-    private Date dateInventory;
+    private LocalDateTime dateInventory;
 
     // Constructeur vide
     public Sale() {
     }
 
     // Constructeur non vide
-    public Sale(int idStock, int idProduct, String productName, int saleQuantity, double salePrice, double totalAmount, 
-                 String productDescription, int idCategory, String image, Date dateInventory) {
+    public Sale(int idStock, int idProduct, String productName, int saleQuantity, double salePrice, double totalAmount,
+                String productDescription, int idCategory, String image, LocalDateTime dateInventory) {
         this.idStock = idStock;
         this.idProduct = idProduct;
         this.productName = productName;
@@ -110,12 +112,34 @@ public class Sale {
         this.image = image;
     }
 
-    public Date getDateInventory() {
+    public LocalDateTime getDateInventory() {
         return dateInventory;
     }
 
-    public void setDateInventory(Date dateInventory) {
+    public void setDateInventory(LocalDateTime dateInventory) {
         this.dateInventory = dateInventory;
+    }
+
+    public boolean insert() {
+        String sql = "INSERT INTO stock (purchase_qtt, sale_qtt, date_inventory, id_product, unitary_purchase_amount) "
+                + "VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = Connexion.getConnexion();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, 0); // Quantité achetée initialisée à 0
+            pstmt.setInt(2, this.getSaleQuantity()); 
+            pstmt.setTimestamp(3, Timestamp.valueOf(this.getDateInventory()));
+            pstmt.setInt(4, this.getIdProduct());
+            pstmt.setDouble(5, 0);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'insertion de l'achat !");
+            e.printStackTrace();
+        }
+        return false;
     }
 
     // Méthode pour obtenir toutes les ventes
@@ -129,16 +153,16 @@ public class Sale {
 
             while (resultSet.next()) {
                 Sale sale = new Sale(
-                    resultSet.getInt("id_stock"),
-                    resultSet.getInt("id_product"),
-                    resultSet.getString("product_name"),
-                    resultSet.getInt("sale_qtt"),
-                    resultSet.getDouble("sale_price"),
-                    resultSet.getDouble("total_amount"),
-                    resultSet.getString("product_description"),
-                    resultSet.getInt("id_category"),
-                    resultSet.getString("image"),
-                    resultSet.getDate("date_inventory")
+                        resultSet.getInt("id_stock"),
+                        resultSet.getInt("id_product"),
+                        resultSet.getString("product_name"),
+                        resultSet.getInt("sale_qtt"),
+                        resultSet.getDouble("sale_price"),
+                        resultSet.getDouble("total_amount"),
+                        resultSet.getString("product_description"),
+                        resultSet.getInt("id_category"),
+                        resultSet.getString("image"),
+                        resultSet.getTimestamp("date_inventory").toLocalDateTime()
                 );
                 sales.add(sale);
             }
@@ -160,22 +184,22 @@ public class Sale {
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 while (resultSet.next()) {
                     Sale sale = new Sale(
-                        resultSet.getInt("id_stock"),
-                        resultSet.getInt("id_product"),
-                        resultSet.getString("product_name"),
-                        resultSet.getInt("sale_qtt"),
-                        resultSet.getDouble("sale_price"),
-                        resultSet.getDouble("total_amount"),
-                        resultSet.getString("product_description"),
-                        resultSet.getInt("id_category"),
-                        resultSet.getString("image"),
-                        resultSet.getDate("date_inventory")
+                            resultSet.getInt("id_stock"),
+                            resultSet.getInt("id_product"),
+                            resultSet.getString("product_name"),
+                            resultSet.getInt("sale_qtt"),
+                            resultSet.getDouble("sale_price"),
+                            resultSet.getDouble("total_amount"),
+                            resultSet.getString("product_description"),
+                            resultSet.getInt("id_category"),
+                            resultSet.getString("image"),
+                            resultSet.getTimestamp("date_inventory").toLocalDateTime()
                     );
                     sales.add(sale);
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la récupération des sales par idProduct !");
+            System.err.println("Erreur lors de la récupération des ventes par idProduct !");
             e.printStackTrace();
         }
         return sales;
@@ -193,16 +217,16 @@ public class Sale {
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 while (resultSet.next()) {
                     Sale sale = new Sale(
-                        resultSet.getInt("id_stock"),
-                        resultSet.getInt("id_product"),
-                        resultSet.getString("product_name"),
-                        resultSet.getInt("sale_qtt"),
-                        resultSet.getDouble("sale_price"),
-                        resultSet.getDouble("total_amount"),
-                        resultSet.getString("product_description"),
-                        resultSet.getInt("id_category"),
-                        resultSet.getString("image"),
-                        resultSet.getDate("date_inventory")
+                            resultSet.getInt("id_stock"),
+                            resultSet.getInt("id_product"),
+                            resultSet.getString("product_name"),
+                            resultSet.getInt("sale_qtt"),
+                            resultSet.getDouble("sale_price"),
+                            resultSet.getDouble("total_amount"),
+                            resultSet.getString("product_description"),
+                            resultSet.getInt("id_category"),
+                            resultSet.getString("image"),
+                            resultSet.getTimestamp("date_inventory").toLocalDateTime()
                     );
                     sales.add(sale);
                 }
@@ -225,16 +249,16 @@ public class Sale {
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 while (resultSet.next()) {
                     Sale sale = new Sale(
-                        resultSet.getInt("id_stock"),
-                        resultSet.getInt("id_product"),
-                        resultSet.getString("product_name"),
-                        resultSet.getInt("sale_qtt"),
-                        resultSet.getDouble("sale_price"),
-                        resultSet.getDouble("total_amount"),
-                        resultSet.getString("product_description"),
-                        resultSet.getInt("id_category"),
-                        resultSet.getString("image"),
-                        resultSet.getDate("date_inventory")
+                            resultSet.getInt("id_stock"),
+                            resultSet.getInt("id_product"),
+                            resultSet.getString("product_name"),
+                            resultSet.getInt("sale_qtt"),
+                            resultSet.getDouble("sale_price"),
+                            resultSet.getDouble("total_amount"),
+                            resultSet.getString("product_description"),
+                            resultSet.getInt("id_category"),
+                            resultSet.getString("image"),
+                            resultSet.getTimestamp("date_inventory").toLocalDateTime()
                     );
                     sales.add(sale);
                 }

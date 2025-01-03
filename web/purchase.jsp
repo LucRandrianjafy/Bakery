@@ -34,9 +34,9 @@
     }
 
     table {
-        width: 100%;
+        width: 95%;
         border-collapse: collapse;
-        margin: 20px 0;
+        margin: 20px auto;
     }
 
     th, td {
@@ -53,6 +53,31 @@
     tr:hover {
         background-color: #68a4c4; /* Fond lors du survol */
         color: white; /* Texte en blanc lors du survol */
+    }
+
+    .circle-button {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: white;
+        color: rgb(21, 122, 37);
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.5s, color 0.5s;
+    }
+
+    .circle-button:hover {
+        background-color: #1e4356;
+        color: white;
+    }
+
+
+    .circle-button i {
+        font-size: 50px;
     }
   </style>
 
@@ -75,6 +100,7 @@
           <li><a href="product">Products</a></li>
           <li><a href="sale">Sales</a></li>
           <li><a href="purchase" class="active">Purchases</a></li>
+          <li><a href="fabrication">Manufacturing</a></li>
           
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -91,7 +117,13 @@
     </div><!-- End Page Title -->
 
     <section id="portfolio" class="portfolio section">
-      
+
+      <div style="display: flex; justify-content: center; align-items: center; height: 3rem;">
+        <a href="insert-purchase" class="circle-button">
+            <strong><i class="bi bi-plus"></i></strong>
+        </a>
+      </div><br>
+
       <table>
         <thead>
             <tr>

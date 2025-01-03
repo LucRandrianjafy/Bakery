@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Sale" %>
+<%@ page import="model.ProductCategory" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,62 +28,9 @@
 
   <!-- Main CSS File -->
   <link href="assets/others/css/main.css" rel="stylesheet">
-    <style>
-      h1 {
-        text-align: center;
-        color: white;
-      }
-
-      table {
-        width: 95%;
-        border-collapse: collapse;
-        margin: 20px auto;
-      }
-
-      th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-
-      th {
-        background-color: #1e4356;
-        color: white;
-      }
-
-      tr:hover {
-        background-color: #68a4c4;
-        color: white;
-      }
-
-      .circle-button {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        background-color: white;
-        color: rgb(21, 122, 37);
-        border: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        text-decoration: none;
-        transition: background-color 0.5s, color 0.5s;
-      }
-
-      .circle-button:hover {
-          background-color: #1e4356;
-          color: white;
-      }
-
-
-      .circle-button i {
-          font-size: 50px;
-      }
-    </style>
 </head>
 
-<body class="about-page">
+<body class="portfolio-details-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
@@ -97,9 +45,9 @@
         <ul>
           <li><a href="accueil.jsp">Home</a></li>
           <li><a href="product">Products</a></li>
-          <li><a href="sale" class="active">Sales</a></li>
+          <li><a href="sale">Sales</a></li>
           <li><a href="purchase">Purchases</a></li>
-          <li><a href="fabrication">Manufacturing</a></li>
+          <li><a href="fabrication" class="active">Manufacturing</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -111,55 +59,76 @@
 
     <!-- Page Title -->
     <div class="page-title dark-background">
-      <h1>List of Sales</h1>
+      <div class="container position-relative">
+        <h1>Manufacturing</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Manufacturing</li>
+          </ol>
+        </nav>
+      </div>
     </div><!-- End Page Title -->
 
-    <section id="portfolio" class="portfolio section">
-
-      <div style="display: flex; justify-content: center; align-items: center; height: 3rem;">
-        <a href="insert-sale" class="circle-button">
-            <strong><i class="bi bi-plus"></i></strong>
-        </a>
-      </div><br>
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
       
-      <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom du Produit</th>
-                <th>Quantité</th>
-                <th>Prix Unitaire</th>
-                <th>Montant Total</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% 
-                List<Sale> sales = (List<Sale>) request.getAttribute("sales");
-                if (sales != null) { 
-                    for (Sale sale : sales) { 
-            %>
-              <tr>
-                <td><%= sale.getIdStock() %></td>
-                <td><%= sale.getProductName() %></td>
-                <td><%= sale.getSaleQuantity() %></td>
-                <td><%= sale.getSalePrice() %></td>
-                <td><%= sale.getTotalAmount() %></td>
-                <td><%= sale.getDateInventory() %></td>
-              </tr>
-            <% 
-                    } 
-                } else { 
-            %>
-                <tr>
-                    <td colspan="6">Aucune vente disponible</td>
-                </tr>
-            <% 
-                } 
-            %>
-        </tbody>
-      </table>    
-    </section>
+        <center><h2>Product</h2></center>
+
+        <form action="fabrication" method="post">
+
+            <div class="form-group">
+              <% if (request.getAttribute("message") != null) { %>
+                <div class="alert alert-success" role="alert">
+                    <%= request.getAttribute("message") %>
+                </div>
+            <% } %>
+            
+            <% if (request.getAttribute("error_message") != null) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= request.getAttribute("error_message") %>
+                </div>
+            <% } %>
+          
+            <label for="name">Name</label>
+            <select id="idProduct" name="idProduct" class="form-control" required>
+                <% 
+                    // Récupérer la liste des catégories depuis l'attribut de la requête
+                    List<ProductCategory> pc = (List<ProductCategory>) request.getAttribute("pc");
+                    if (pc != null) {
+                        for (ProductCategory productCategory : pc) {
+                %>
+                            <option value="<%= productCategory.getIdProduct() %>">
+                                <%= productCategory.getProductName() + " - " + productCategory.getCategoryName() %>
+                            </option>
+                <% 
+                        }
+                    }
+                %>
+            </select>
+          </div>
+          
+
+          <div class="form-group">
+            <label for="qtt">Quantity</label>
+            <input type="number" id="qtt" name="qtt" class="form-control" required />
+          </div>      
+          
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="datetime-local" id="date" name="date" class="form-control" required />
+          </div>            
+
+          <div class="row mb-3">
+            <button id="search-btn" class="btn btn-primary" style="background-color:#1e4356 ; margin-top: 2rem;" >Search</button>
+          </div><br><br>
+        </form>
+
+      </div>
+    </section><!-- /Portfolio Details Section -->
+
+
   </main>
 
   <footer id="footer" class="footer dark-background">
